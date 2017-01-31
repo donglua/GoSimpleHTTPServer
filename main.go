@@ -7,9 +7,13 @@ import (
 )
 
 func main() {
-	fmt.Println("Serving files in the current directory on port 8000")
+	port := os.Args[1]
+	if port == "" {
+		port = "8000"
+	}
+	fmt.Println("Serving files in the current directory on port " + port)
 	http.Handle("/", http.FileServer(http.Dir(".")))
-	err := http.ListenAndServe(":8000", nil)
+	err := http.ListenAndServe(":"+port, nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
