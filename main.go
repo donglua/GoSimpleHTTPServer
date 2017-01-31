@@ -8,9 +8,9 @@ import (
 )
 
 func main() {
-	port := os.Args[1]
-	if port == "" {
-		port = "8000"
+	port := "8000"
+	if len(os.Args) > 1 {
+		port = os.Args[1]
 	}
 	fmt.Println("Serving files in the current directory on port " + port)
 	http.Handle("/", http.FileServer(http.Dir(".")))
